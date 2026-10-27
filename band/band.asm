@@ -9,11 +9,11 @@
 ; behind the ULA's reads, a cell still holds the colour from the line before, and the band breaks into steps.
 ;
 ; START (T-states after the frame interrupt, past a fixed base) and PAD (T-states of padding at the end of each
-; line) were tuned for each width in Fuse 1.10.0, 48K, so that every line of the band comes out whole:
+; line) were tuned for each width in Fuse 1.10.0, 48K, so that every line of the band comes out whole and in its own colour:
 ;
 ;   COLS   START   PAD
-;     1     180    193
-;     4     180    152
+;     1     228    193
+;     4     228    152
 ;     8     228    100
 ;    12     228     49
 ;    16     228      0
