@@ -5,11 +5,13 @@
 ; colour of its own. This program does that for character row 8 (pixel lines 64 to 71), one LD (HL),A / INC L per
 ; cell, as fast as the Z80 can write, then waits out the rest of the 224 T-state line.
 ;
-; COLS sets how many cells across are rewritten. On a 48K the band holds up to 16 columns. At 17 the writes fall
-; behind the ULA's reads, a cell still holds the colour from the line before, and the band breaks into steps.
+; COLS sets how many cells across are rewritten. On a 48K the band holds up to 16 columns, where a line's work takes
+; exactly the 224 T-states of the line. At 17 it takes longer than the line, so each line starts later than the one
+; before, the last cells still hold the colour from the line before, and the band breaks into steps.
 ;
 ; START (T-states after the frame interrupt, past a fixed base) and PAD (T-states of padding at the end of each
-; line) were tuned for each width in Fuse 1.10.0, 48K, so that every line of the band comes out whole and in its own colour:
+; line) were tuned for each width in Fuse 1.10.0, 48K, so that every line of the band comes out whole and in a colour
+; of its own:
 ;
 ;   COLS   START   PAD
 ;     1     228    193
