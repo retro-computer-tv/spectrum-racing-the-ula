@@ -7,6 +7,7 @@ The small ZX Spectrum programs from Retro Computer TV's film *Racing the ULA: Ho
 | [stripes](stripes/stripes.asm) | Stripes drawn in the border by changing its colour at fixed times after the frame interrupt. Each edge lands on an 8-pixel step. | 48K |
 | [probe](probe/floatbus.asm) | The floating bus: reading a port nothing answers returns the byte the ULA is fetching. The border shows blue beside one band of the screen, and nowhere else. On a +2A or +3 it stays white. | 48K; +2A or +3 for the contrast |
 | [band](band/band.asm) | Multicolour: one character row rewritten once per pixel line, so each line gets its own colour. It holds up to 16 columns on a 48K and breaks into steps at 17. | 48K |
+| [cobra](cobra/README.md) | A one-POKE fix for Cobra (Ocean, 1986), which freezes on a +2A or +3 because it waits on the floating bus. | +2A or +3 |
 
 ## Building
 
