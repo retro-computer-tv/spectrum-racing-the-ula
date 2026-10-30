@@ -21,7 +21,7 @@
 ;    16     228      0
 ;    17     228      0    (it can't be whole: this is the failure)
 ;
-; Assemble with sjasmplus: sjasmplus -DCOLS=16 -DSTART=228 -DPAD=0 band.asm   (writes band.sna)
+; Assemble with sjasmplus: sjasmplus -DCOLS=16 -DSTART=228 -DPAD=0 band.asm   (writes band.tap: LOAD "" runs it)
 ; Real 48Ks differ slightly in timing; if the band's edge shimmers, try START a few T-states either way.
 
     DEVICE ZXSPECTRUM48
@@ -133,4 +133,16 @@ phase:
 colours:                    ; paper colours as attributes (paper << 3), twice round
     db 1<<3, 2<<3, 6<<3, 4<<3, 5<<3, 3<<3, 7<<3, 2<<3
     db 1<<3, 2<<3, 6<<3, 4<<3, 5<<3, 3<<3, 7<<3, 2<<3
-    SAVESNA "band.sna", start
+code_end:
+
+; 10 CLEAR 32767: LOAD ""CODE: RANDOMIZE USR 32768
+basic:
+    db 0,10
+    dw line10_end - line10
+line10:
+    db $FD, '32767', $0E, 0,0, $FF,$7F, 0, ':', $EF, '""', $AF, ':', $F9, $C0, '32768', $0E, 0,0, $00,$80, 0, $0D
+line10_end:
+basic_end:
+    EMPTYTAP "band.tap"
+    SAVETAP "band.tap", BASIC, "band", basic, basic_end-basic, 10
+    SAVETAP "band.tap", CODE, "band", start, code_end-start, start
